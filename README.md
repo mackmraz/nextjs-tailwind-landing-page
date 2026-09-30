@@ -1,34 +1,68 @@
-This is a [Next.js](https://nextjs.org/) project bootstrapped with [`create-next-app`](https://github.com/vercel/next.js/tree/canary/packages/create-next-app).
+# Next.js + Tailwind CSS Animated Landing Page ("Metaversus")
 
-## Getting Started
+A single-page marketing site for a fictional metaverse product, "Metaversus". It's a dark, gradient-heavy design with scroll-triggered animations throughout. I built it with Next.js 13 (App Router), Tailwind CSS, and Framer Motion as a front-end practice project, following a tutorial.
 
-First, run the development server:
+> **Status: complete (tutorial build, 2022).** All page sections and the footer are finished. The navbar's search and menu icons are decorative only, with no search or menu behind them.
 
+## Features
+- **Eight page sections plus a navbar and footer:** Hero, About, Explore, Get Started ("How Metaversus Works"), What's New, World ("People on the World"), Insights, and Feedback
+- **Scroll-triggered animations with Framer Motion.** Reusable motion variants in `utils/motion.js` (slide-in, fade-in, zoom-in, staggered children, planet and footer variants) run as each section enters the viewport.
+- **Letter-by-letter "typing" animation** for the section labels (`TypingText` component)
+- **Interactive Explore gallery.** Click a world card to expand it, and the other cards collapse, with an animated flex transition.
+- **Responsive layout** built with Tailwind utility classes, stacking vertically on small screens
+- **Reusable components and data-driven content:** section content lives in `constants/index.js` and is rendered by components like `ExploreCard`, `StartSteps`, `NewFeatures`, and `InsightCard`
+- Custom Tailwind theme colors, a custom easing curve, and gradient and glassmorphism utility classes in `styles/globals.css`
+
+## Tech stack
+
+| Area | Tools |
+|---|---|
+| Framework | Next.js 13.0 (experimental `app/` directory), React 18 |
+| Styling | Tailwind CSS 3, PostCSS, Autoprefixer |
+| Animation | Framer Motion 7 |
+| Linting | ESLint with the Airbnb config and `eslint-config-next` |
+| Language | JavaScript (JSX) |
+
+## Getting started
+
+### Prerequisites
+- Node.js and npm (tested with Node 20)
+
+### Run locally
 ```bash
+git clone https://github.com/mackmraz/nextjs-tailwind-landing-page.git
+cd nextjs-tailwind-landing-page
+npm install
 npm run dev
-# or
-yarn dev
 ```
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+Then open [http://localhost:3000](http://localhost:3000).
 
-You can start editing the page by modifying `pages/index.js`. The page auto-updates as you edit the file.
+### Production build
+```bash
+npm run build   # next build (runs ESLint first)
+npm start       # next start
+npm run lint    # next lint
+```
 
-[API routes](https://nextjs.org/docs/api-routes/introduction) can be accessed on [http://localhost:3000/api/hello](http://localhost:3000/api/hello). This endpoint can be edited in `pages/api/hello.js`.
+> **Note:** the strict Airbnb ESLint rules currently flag style problems (spacing, quotes, and similar) in several components. Next.js treats these as errors, so `npm run build` stops at the lint step. Until the lint issues are fixed, `npx next build --no-lint` builds the site successfully.
 
-The `pages/api` directory is mapped to `/api/*`. Files in this directory are treated as [API routes](https://nextjs.org/docs/api-routes/introduction) instead of React pages.
+## Project structure
 
-## Learn More
+```
+app/
+  layout.js        Root layout (global styles, Eudoxus Sans font)
+  head.js          Page title and meta tags
+  page.js          Composes the navbar, all sections, and the footer
+sections/          Hero, About, Explore, GetStarted, WhatsNew, World, Insights, Feedback
+components/        Navbar, Footer, CustomTexts (TypingText / TitleText), ExploreCard, StartSteps, NewFeatures, InsightCard
+constants/         Content data for the sections
+utils/motion.js    Framer Motion animation variants
+styles/            Tailwind globals, gradients, and shared class-name helpers
+public/            Images and SVG icons
+```
 
-To learn more about Next.js, take a look at the following resources:
+The Eudoxus Sans font is loaded from an external stylesheet (`stijndv.com`) in `app/layout.js`, so the site needs an internet connection for its font to render as designed.
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
-
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js/) - your feedback and contributions are welcome!
-
-## Deploy on Vercel
-
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
-
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/deployment) for more details.
+## Acknowledgements
+Built by following JavaScript Mastery's tutorial [*Build and Deploy a Modern Next.js Website With Framer Motion & Tailwind CSS*](https://www.youtube.com/watch?v=ugCN_gynFYw) (the "Metaversus" design). The design, copy, and image assets come from that tutorial.
