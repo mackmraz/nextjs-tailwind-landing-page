@@ -45,8 +45,6 @@ npm start       # next start
 npm run lint    # next lint
 ```
 
-> **Note:** the strict Airbnb ESLint rules currently flag style problems (spacing, quotes, and similar) in several components. Next.js treats these as errors, so `npm run build` stops at the lint step. Until the lint issues are fixed, `npx next build --no-lint` builds the site successfully.
-
 ## Project structure
 
 ```
